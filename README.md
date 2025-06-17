@@ -1,12 +1,17 @@
 # Strategic Resilience Planner
 
-A comprehensive web application that helps organizations assess their dependency risks and develop strategic resilience plans.
+A comprehensive web application for assessing organizational dependencies and building strategic resilience plans.
 
 ## 🔍 Overview
 
-The Strategic Resilience Planner helps businesses identify and mitigate risks associated with over-reliance on key assets, individuals, or systems. The tool guides organizations through a structured assessment process and provides tailored recommendations for building resilience.
+The Strategic Resilience Planner helps organizations identify their key dependencies, assess risks, and develop actionable plans to enhance resilience. This tool is particularly valuable for:
 
-## ✨ Key Features
+- Sports organizations assessing player and resource dependencies
+- Technology companies evaluating system and technical staff dependencies
+- Professional services firms managing client concentration risks
+- Supply chain managers identifying vendor dependencies
+
+## ⚙ Key Features
 
 - **Dependency Risk Assessment**: Identify and quantify dependencies on key personnel, systems, or partnerships
 - **Scenario Planning**: Model the impact of losing critical assets and visualize the consequences
@@ -46,6 +51,27 @@ Access the live application at: [https://dxaginfo.github.io/strategic-resilience
 - **Professional Services**: Identifying client concentration risks and planning for diversification
 - **Supply Chain Management**: Evaluating supplier dependencies and developing contingency plans
 
-## 📝 License
+## 📄 License
 
 MIT License - See LICENSE file for details.
+
+## 🔧 Application Components
+
+### Assessment Wizard
+1. **Organization Profile**: Gather key organizational information
+2. **Asset Identification**: Document critical dependencies and assets
+3. **Dependency Assessment**: Rate importance and replaceability of each asset
+4. **Contingency Evaluation**: Assess current backup measures and preparations
+5. **Results Dashboard**: View comprehensive resilience metrics and recommendations
+
+### Visualization Tools
+- **Dependency Heatmap**: Plot assets based on importance and replaceability
+- **Risk-Impact Matrix**: Visualize probability and potential impact of disruptions
+- **Resilience Radar**: Compare resilience across different organizational categories
+- **Risk Indicators**: Color-coded system highlighting critical vulnerabilities
+
+### Recommendation System
+- **Quick-Win Actions**: Immediate steps to improve resilience
+- **Medium-Term Strategies**: 3-6 month initiatives for risk reduction
+- **Long-Term Planning**: Structural changes for enhanced organizational resilience
+- **Industry-Specific Guidance**: Tailored recommendations based on sector
