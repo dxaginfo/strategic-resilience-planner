@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Resilience Planner</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="bg-primary text-white shadow-sm">
+        <div class="container py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1 class="h3 mb-0">
+                    <i class="bi bi-shield-check me-2"></i>
+                    Strategic Resilience Planner
+                </h1>
+                <div>
+                    <button id="saveBtn" class="btn btn-outline-light btn-sm me-2">
+                        <i class="bi bi-save me-1"></i> Save
+                    </button>
+                    <button id="loadBtn" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-folder2-open me-1"></i> Load
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="container py-4">
+        <!-- Welcome Screen (shown by default) -->
+        <section id="welcomeScreen" class="text-center py-5">
+            <div class="row justify-content-center">
+                <div class="col-md-8 col-lg-6">
+                    <img src="assets/img/resilience-icon.png" alt="Resilience Icon" class="img-fluid mb-4" style="max-width: 150px;">
+                    <h2 class="mb-3">Welcome to the Strategic Resilience Planner</h2>
+                    <p class="lead mb-4">Identify dependencies, assess risks, and build a more resilient organization.</p>
+                    <button id="startAssessmentBtn" class="btn btn-primary btn-lg">
+                        <i class="bi bi-play-fill me-1"></i> Start New Assessment
+                    </button>
+                    <p class="text-muted mt-3">Your data remains private - all information is stored in your browser only.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Wizard (hidden initially) -->
+        <section id="assessmentWizard" class="d-none">
+            <!-- Progress Indicator -->
+            <div class="progress mb-4">
+                <div id="progressBar" class="progress-bar bg-success" role="progressbar" style="width: 0%"></div>
+            </div>
+
+            <!-- Step Navigation -->
+            <div class="d-flex justify-content-between mb-4">
+                <button id="prevStepBtn" class="btn btn-outline-secondary" disabled>
+                    <i class="bi bi-arrow-left me-1"></i> Previous
+                </button>
+                <div class="step-indicators">
+                    <span id="currentStepIndicator">Step 1 of 5</span>
+                </div>
+                <button id="nextStepBtn" class="btn btn-primary">
+                    Next <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+            </div>
+
+            <!-- Step 1: Organization Profile -->
+            <div id="step1" class="assessment-step">
+                <h3 class="mb-4">Organization Profile</h3>
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="orgName" class="form-label">Organization/Team Name</label>
+                            <input type="text" class="form-control" id="orgName" placeholder="Enter your organization name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="industrySector" class="form-label">Industry/Sector</label>
+                            <select class="form-select" id="industrySector">
+                                <option value="" selected disabled>Select your industry</option>
+                                <option value="sports">Sports Team/Organization</option>
+                                <option value="technology">Technology</option>
+                                <option value="finance">Finance</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="retail">Retail</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="education">Education</option>
+                                <option value="professional">Professional Services</option>
+                                <option value="entertainment">Entertainment & Media</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="orgSize" class="form-label">Organization Size</label>
+                            <select class="form-select" id="orgSize">
+                                <option value="" selected disabled>Select size</option>
+                                <option value="micro">Micro (1-9 employees)</option>
+                                <option value="small">Small (10-49 employees)</option>
+                                <option value="medium">Medium (50-249 employees)</option>
+                                <option value="large">Large (250+ employees)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="primaryObjectives" class="form-label">Primary Objectives</label>
+                            <textarea class="form-control" id="primaryObjectives" rows="3" placeholder="What are your organization's key goals and objectives?"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Key Asset Identification -->
+            <div id="step2" class="assessment-step d-none">
+                <h3 class="mb-4">Key Asset Identification</h3>
+                <p class="text-muted mb-4">Identify the key assets your organization depends on. These could be people, systems, partnerships, etc.</p>
+                
+                <div id="assetList" class="mb-4">
+                    <!-- Asset items will be added here dynamically -->
+                </div>
+                
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Add New Asset</h5>
+                        <div class="mb-3">
+                            <label for="assetName" class="form-label">Asset Name</label>
+                            <input type="text" class="form-control" id="assetName" placeholder="e.g., Star Player, CRM System, Key Vendor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="assetCategory" class="form-label">Category</label>
+                            <select class="form-select" id="assetCategory">
+                                <option value="" selected disabled>Select a category</option>
+                                <option value="people">People (employees, players, specialists)</option>
+                                <option value="systems">Systems & Technology</option>
+                                <option value="relationships">Partnerships & Relationships</option>
+                                <option value="facilities">Facilities & Equipment</option>
+                                <option value="knowledge">Intellectual Property & Knowledge</option>
+                                <option value="market">Market Access & Channels</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="assetDescription" class="form-label">Brief Description</label>
+                            <textarea class="form-control" id="assetDescription" rows="2" placeholder="Why is this asset important?"></textarea>
+                        </div>
+                        <button id="addAssetBtn" class="btn btn-success">
+                            <i class="bi bi-plus-circle me-1"></i> Add Asset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Dependency Assessment -->
+            <div id="step3" class="assessment-step d-none">
+                <h3 class="mb-4">Dependency Assessment</h3>
+                <p class="text-muted mb-4">Rate each asset based on its importance and the difficulty of replacing it.</p>
+                
+                <div id="dependencyAssessmentList">
+                    <!-- Dependency assessment forms will be added here dynamically -->
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Please add assets in Step 2 before proceeding with the dependency assessment.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Contingency Evaluation -->
+            <div id="step4" class="assessment-step d-none">
+                <h3 class="mb-4">Contingency Evaluation</h3>
+                <p class="text-muted mb-4">Assess your current contingency measures for high-risk dependencies.</p>
+                
+                <div id="contingencyEvaluationList">
+                    <!-- Contingency forms will be added here dynamically -->
+                </div>
+            </div>
+
+            <!-- Step 5: Results Dashboard -->
+            <div id="step5" class="assessment-step d-none">
+                <h3 class="mb-4">Your Resilience Assessment Results</h3>
+                
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Overall Resilience Score</h5>
+                                <div class="display-1 fw-bold my-3" id="resilienceScore">0</div>
+                                <div class="progress mb-3">
+                                    <div id="resilienceScoreBar" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                                </div>
+                                <p class="card-text" id="resilienceScoreDescription"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">Key Risk Factors</h5>
+                                <ul class="list-group list-group-flush" id="keyRisksList">
+                                    <!-- Key risks will be added here dynamically -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title">Dependency Heat Map</h5>
+                                <div class="chart-container" style="position: relative; height: 300px;">
+                                    <canvas id="dependencyHeatmap"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header">
+                                <h5 class="mb-0">Recommended Actions</h5>
+                            </div>
+                            <div class="card-body">
+                                <ul class="nav nav-tabs" id="recommendationTabs" role="tablist">
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link active" id="quick-wins-tab" data-bs-toggle="tab" data-bs-target="#quick-wins" type="button" role="tab">
+                                            Quick Wins
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="medium-term-tab" data-bs-toggle="tab" data-bs-target="#medium-term" type="button" role="tab">
+                                            Medium-Term
+                                        </button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="long-term-tab" data-bs-toggle="tab" data-bs-target="#long-term" type="button" role="tab">
+                                            Long-Term
+                                        </button>
+                                    </li>
+                                </ul>
+                                <div class="tab-content p-3" id="recommendationTabContent">
+                                    <div class="tab-pane fade show active" id="quick-wins" role="tabpanel">
+                                        <ul id="quickWinsList" class="list-group list-group-flush">
+                                            <!-- Quick wins recommendations will be added here -->
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="medium-term" role="tabpanel">
+                                        <ul id="mediumTermList" class="list-group list-group-flush">
+                                            <!-- Medium-term recommendations will be added here -->
+                                        </ul>
+                                    </div>
+                                    <div class="tab-pane fade" id="long-term" role="tabpanel">
+                                        <ul id="longTermList" class="list-group list-group-flush">
+                                            <!-- Long-term recommendations will be added here -->
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-center mt-4">
+                    <button id="exportReportBtn" class="btn btn-primary me-2">
+                        <i class="bi bi-file-earmark-pdf me-1"></i> Export Report
+                    </button>
+                    <button id="restartAssessmentBtn" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-repeat me-1"></i> Start New Assessment
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light py-3 mt-auto">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 Strategic Resilience Planner</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="docs/user-guide.md" target="_blank" class="text-decoration-none me-3">User Guide</a>
+                    <a href="https://github.com/dxaginfo/strategic-resilience-planner" target="_blank" class="text-decoration-none">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Save Assessment Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Save Assessment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="assessmentName" class="form-label">Assessment Name</label>
+                        <input type="text" class="form-control" id="assessmentName" placeholder="My Resilience Assessment">
+                    </div>
+                    <div class="form-text">
+                        <i class="bi bi-info-circle me-1"></i> Your assessment data will be saved in your browser's local storage.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmSaveBtn">Save Assessment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Assessment Modal -->
+    <div class="modal fade" id="loadModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Load Assessment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="savedAssessmentsList" class="list-group">
+                        <!-- Saved assessments will be listed here -->
+                    </div>
+                    <div id="noSavedAssessments" class="alert alert-info mt-3">
+                        <i class="bi bi-info-circle me-1"></i> No saved assessments found.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete this assessment? This action cannot be undone.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.0/dist/chart.umd.min.js"></script>
+    <script src="assets/js/storage-manager.js"></script>
+    <script src="assets/js/assessment-engine.js"></script>
+    <script src="assets/js/visualization.js"></script>
+    <script src="assets/js/recommendations.js"></script>
+    <script src="assets/js/ui-controller.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
