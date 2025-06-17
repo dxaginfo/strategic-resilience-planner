@@ -1,0 +1,269 @@
+/* Strategic Resilience Planner - Main Stylesheet */
+
+/* General Layout */
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Custom Colors */
+:root {
+    --primary-color: #2a9d8f;
+    --secondary-color: #e76f51;
+    --accent-color: #f4a261;
+    --dark-color: #264653;
+    --light-color: #e9f5f3;
+    --warning-color: #e9c46a;
+    --danger-color: #e63946;
+    --success-color: #2a9d8f;
+}
+
+/* Button Overrides */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #248a7d;
+    border-color: #248a7d;
+}
+
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+/* Cards and Elements */
+.card {
+    border-radius: 0.5rem;
+    border: none;
+}
+
+.card-header {
+    background-color: rgba(42, 157, 143, 0.1);
+    border-bottom: 1px solid rgba(42, 157, 143, 0.2);
+}
+
+.progress {
+    height: 0.8rem;
+    border-radius: 0.4rem;
+}
+
+/* Assessment Steps */
+.assessment-step {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Asset List Items */
+.asset-item {
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.asset-item:hover {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+.asset-item.people {
+    border-left-color: #4cc9f0;
+}
+
+.asset-item.systems {
+    border-left-color: #4895ef;
+}
+
+.asset-item.relationships {
+    border-left-color: #560bad;
+}
+
+.asset-item.facilities {
+    border-left-color: #f72585;
+}
+
+.asset-item.knowledge {
+    border-left-color: #7209b7;
+}
+
+.asset-item.market {
+    border-left-color: #3a0ca3;
+}
+
+.asset-item.other {
+    border-left-color: #6c757d;
+}
+
+/* Dependency Assessment Rating Sliders */
+.dependency-rating-container {
+    margin-bottom: 1.5rem;
+}
+
+.dependency-slider {
+    width: 100%;
+}
+
+.rating-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.25rem;
+}
+
+.rating-labels span {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+/* Charts and Data Visualization */
+.chart-container {
+    margin: 1rem 0;
+}
+
+/* Resilience Score Display */
+.score-display {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.score-value {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+.score-label {
+    font-size: 1.25rem;
+    color: #6c757d;
+}
+
+/* Recommendations */
+.recommendation-item {
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: var(--light-color);
+    border-left: 4px solid var(--primary-color);
+}
+
+.recommendation-item.quick-win {
+    border-left-color: var(--success-color);
+}
+
+.recommendation-item.medium-term {
+    border-left-color: var(--warning-color);
+}
+
+.recommendation-item.long-term {
+    border-left-color: var(--secondary-color);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .score-value {
+        font-size: 3rem;
+    }
+    
+    .score-label {
+        font-size: 1rem;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Range Sliders */
+input[type=range] {
+    height: 25px;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #e9ecef;
+    border-radius: 4px;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -6px;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8px;
+    cursor: pointer;
+    background: #e9ecef;
+    border-radius: 4px;
+}
+
+input[type=range]::-moz-range-thumb {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: var(--primary-color);
+    cursor: pointer;
+}
+
+/* Risk Levels */
+.risk-high {
+    color: var(--danger-color);
+}
+
+.risk-medium {
+    color: var(--warning-color);
+}
+
+.risk-low {
+    color: var(--success-color);
+}
+
+/* Loading Indicator */
+.loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 0.25rem solid rgba(42, 157, 143, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
